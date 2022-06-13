@@ -1,0 +1,47 @@
+<div class="modal fade " id="agente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" [ngClass]="show"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">How you feel?</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4">
+            <i class="bi bi-emoji-frown" style="color: #0050bc;" [ngClass]="{'active': emocion === 1}"
+              (click)="emocion = 1"></i>
+          </div>
+          <div class="col-4">
+            <i class="bi bi-emoji-expressionless" style="color: #00aa9f;" [ngClass]="{'active': emocion === 2}"
+              (click)="emocion = 2"></i>
+          </div>
+          <div class="col-4">
+            <i class="bi bi-emoji-heart-eyes" style="color: #ffe164;" [ngClass]="{'active': emocion === 3}"
+              (click)="emocion = 3"></i>
+          </div>
+        </div>
+
+        <div class="text-center" *ngIf="(emocion === 0) && (invalido)" style="font-size: 20px;">
+          you need to tell us how you feel!
+        </div>
+
+        <div class="row">
+          <div class="col-12 mt-3">
+            Would you like to repeat the activities
+          </div>
+          <div class="row" *ngIf="agente">
+            <div class="col actividad" *ngFor="let p of agente.progresos, let i = index"
+              [ngClass]="{'active': actividadSelecionada === i}" (click)="actividadASelecionar(p.actividad, i)">
+              {{p.actividad}}
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-lg text-white" style="background: #f25b26;" data-bs-dismiss="modal"
+          (click)="terminar()">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

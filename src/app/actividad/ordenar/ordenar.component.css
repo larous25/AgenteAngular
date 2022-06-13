@@ -1,0 +1,31 @@
+.palabras .palabra {
+  float: left;
+}
+
+/* este es el contenedor */
+.palabraOrdenada {
+  background: #0050bc;  
+  display: inline-block;
+  padding: 15px 40px;
+  margin-right: 5px;
+}
+
+.palabraAordenar {
+  padding: 15px;
+  background: #1b1464;
+  color: white;
+  cursor: pointer;
+}
+
+.sombra {
+  box-shadow: 7px 4px 10px 0px rgba(0,0,0,0.75);
+}
+
+
+.form-control-test {
+  display: inline-block !important;
+  color: #e95ca0;
+  border: none;
+  border-bottom: 1px solid #ced4da;
+  margin: 0 6px;
+}

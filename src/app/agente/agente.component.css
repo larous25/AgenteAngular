@@ -1,0 +1,19 @@
+.bi {
+  font-size: 150px;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+.actividad {
+  cursor: pointer;
+}
+.actividad:hover {
+  background: #cceff1;
+}
+
+.active {
+  background: #cceff1;
+}

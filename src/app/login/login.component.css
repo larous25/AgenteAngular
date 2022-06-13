@@ -1,0 +1,84 @@
+.container-fluid {
+  height: 100vh;
+
+  background-color: #cceff1 !important;
+}
+
+
+.cascading-right {
+  margin-right: -50px;
+}
+
+.titulo {
+  font-family: 'Asap', sans-serif;
+  font-size: Bold 700;
+  font-style: italic;
+}
+
+.formu {
+  padding-left: 5px;
+  font-family: 'Asap', sans-serif;
+  font-size: SemiBold 600;
+  font-style: italic;
+  text-align: left !important;
+
+}
+
+
+.ing {
+  font-family: 'Asap', sans-serif;
+  font-size: Medium 500;
+  font-style: italic;
+  background-color: #02a9a1;
+  border: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.lol {
+  margin-top: 100px;
+}
+
+
+.animacion {
+  animation: animacion 1.5s ease;
+
+}
+
+
+input::placeholder{
+
+  font-style: italic;
+}
+
+@keyframes animacion {
+
+  10%,
+  90% {
+    transform: translate3d(-3px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(4px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-8px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(8px, 0, 0);
+  }
+}
+
+
+
+@media (max-width: 991.98px) {
+  .cascading-right {
+    margin-right: 0;
+  }
+}

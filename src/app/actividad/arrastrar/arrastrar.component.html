@@ -1,0 +1,45 @@
+<div class="container mt-3 bg-white">
+
+  <div class="p-3">
+
+    <div class="preguntas mt-3">
+      <div class="row" *ngFor="let p of actividad.preguntas;let i = index">
+
+        <div class="col-6">
+          <!-- cajas donde se arrastra -->
+          <div style="position: relative;">
+            <div class="tituloPregunta">
+              {{ p.pregunta }}
+            </div>
+            <div pregunta="pregunta" attr.pid="{{p._id}}" (drop)="soltado($event)" (dragover)="permitir($event)"
+              (dragenter)="ingresa($event)" class="pregunta text-center border bg-info">
+            </div>
+          </div>
+        </div>
+        <!-- aqui valor para confirmar la pregunta -->
+        <div class="col-6 respuestas" *ngFor="let r of preguntas[i].respuestas">
+          <div *ngIf="r.imagen" attr.rid="{{r._id}}" attr.pid="{{preguntas[i]._id}}" class="respuestaImagen" draggable="true"
+            (dragstart)="arrastra($event)" style="background-image: url(assets/{{r.imagen}});">
+          </div>
+          <div class="respuestaPalabra text-center text-white align-middle" *ngIf="r.respuesta" attr.rid="{{r._id}}"
+            attr.pid="{{preguntas[i]._id}}" draggable="true" (dragstart)="arrastra($event)">
+            <span class="">
+              {{r.respuesta}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div *ngIf="anuncio" class="alert alert-danger" role="alert">
+      please complete all the exercises
+    </div>
+    <div class="d-grid gap-2 d-md-block text-center">
+      <button class="btn btn-lg m-2 text-white" style="background: #f25b26;" (click)="terminar()">
+        conclude
+      </button>
+    </div>
+  </div>
+
+</div>

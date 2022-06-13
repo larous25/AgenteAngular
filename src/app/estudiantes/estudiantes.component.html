@@ -1,0 +1,33 @@
+<div class="container bg-white mt-5 p-5">
+  <form class="mx-5" [formGroup]="estudianteForm" (submit)="crear()">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Nombre Completo</label>
+      <input type="email" class="form-control" id="nombre" name="nombre" formControlName="nombre">
+    </div>
+  
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+      <div class="input-group">
+        <span class="input-group-text" (click)="verPass()"><i class="bi bi-eye"></i></span>
+        <input [type]="typePass" class="form-control" id="contra" name="pass" formControlName="contrasena">
+      </div>
+    </div>
+  
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button type="submit" class="btn btn-primary btn-lg">Registrar Estudiante</button>
+    </div>
+  </form>
+</div>
+
+<div class="modal fade" tabindex="-1" [ngClass]="show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center" style="font-size: 30px;">
+        El estudiante ha sido guardado
+      </div>
+      <div class="modal-footer d-grid gap-2 d-md-block text-center">
+        <button type="button" class="btn btn-lg" data-bs-dismiss="modal" style="background: #f25b26;" (click)="resetear()">Aceptar </button>
+      </div>
+    </div>
+  </div>
+</div>

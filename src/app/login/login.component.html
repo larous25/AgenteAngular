@@ -1,0 +1,71 @@
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start ">
+
+  <!-- Jumbotron -->
+  <div class="container-fluid py-4">
+    <div class="container lol">
+      <div class="row g-0 align-items-center ">
+        <div class="col-lg-6 mb-5 mb-lg-0 ">
+          <div class="card cascading-right border-start border-bottom border-top border-secondary rounded"
+            [ngClass]="invalid" style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+            ">
+            <div class="card-body p-5 shadow-lg rounded ">
+              <h2 class="fw-bold mb-5 titulo text-center ">¡Bienvenido!</h2>
+              <form [formGroup]="loginForm" (submit)="send()">
+
+
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+
+                <!-- Email input -->
+                <div class="form-outline ">
+                  <label class="form-label formu" for="nombre">Usuario</label>
+                  <input  placeholder= "Ingrese su usuario" type="email" id="nombre" class="form-control" formControlName="nombre" />
+
+                </div>
+
+                <div class="text-danger mt-2" *ngIf=" invalidU && loginForm.get('nombre')?.invalid">
+
+                  *No ha ingresado un Usuario
+
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mt-4">
+                  <label class="form-label formu" for="contrasena">Contraseña</label>
+                  <input placeholder= "Ingrese su contraseña" type="password" id="contrasena" class="form-control" formControlName="contrasena" />
+
+                </div>
+                <div class="text-danger mt-2" *ngIf=" invalidC && loginForm.get('contrasena')?.invalid">
+
+                  *No ha ingresado una Contraseña
+
+                </div>
+
+                <!-- Submit button -->
+                <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-block mb-4 ing">
+
+                  Ingresar
+                </button>
+              </div>
+
+              <div *ngIf="mensaje"class="alert alert-danger" role="alert">
+                No Fue posible ingresar, usuario o contraseña incorrectos
+              </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-6 mb-5 mb-lg-0  d-none d-md-none d-lg-block ">
+          <img src="assets/boy-reading-book-vector.jpg" class="w-100 shadow-lg rounded " alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

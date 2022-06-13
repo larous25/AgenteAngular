@@ -1,0 +1,60 @@
+<div class="container mt-5">
+
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <span class="nav-link active" aria-current="page" href="#">
+        <strong>
+          student:
+        </strong>
+        {{alumno.nombre}}
+      </span>
+    </li>
+  </ul>
+  <div class="container" *ngIf="!test">
+    <div class="loading first">
+      <div class="loading second">
+        <div class="loading third"></div>
+      </div>
+    </div>
+  </div>
+  <div class="container" *ngIf="test">
+    <div class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <h3>
+          {{test.titulo}}
+        </h3>
+      </div>
+    </div>
+    <div class="cotainer-test mt-3">
+      <form [formGroup]="testFormGroup" (submit)="terminar()">
+        <div *ngFor="let pregunta of test.preguntas, let i = index"
+          class="pregunta col-10 offset-1 mb-3 border-3 border-bottom ">
+          <div id="pregunta{{i}}" class="preguntaTitulo mt-3" [innerHTML]="pregunta.pregunta">
+          </div>
+          <ol type="A" class="col-12 respuestasmultiples">
+            <li *ngFor="let respuesta of pregunta.respuestas">
+              <input type="radio" name="{{pregunta._id}}" id="{{respuesta._id}}" value="{{respuesta.respuesta}}"
+                [formControlName]="pregunta._id">
+
+              <label class="respuesta" for="{{respuesta._id}}">
+                {{respuesta.respuesta}}
+              </label>
+            </li>
+
+          </ol>
+        </div>
+
+        <div *ngIf="testFormGroup.invalid && enviado"class="alert alert-danger" role="alert">
+          You need to answer all the questions
+        </div>
+        <div class="col-12">
+          <div class="d-grid gap-2 d-md-block text-center">
+            <button type="submit" class="btn btn-large btn-primary">
+              conclude
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+
+<div class="cotainer-test mt-3">
+  <form [formGroup]="actividadFormGroup" (submit)="terminar()">
+    <div *ngFor="let pregunta of actividad.preguntas, let i = index"
+      class="pregunta col-10 offset-1 mb-3 border-3 border-bottom ">
+      <div id="pregunta{{i}}" class="preguntaTitulo mt-3" [innerHTML]="pregunta.pregunta">
+      </div>
+      <ol type="A" class="col-12 respuestasmultiples">
+        <li *ngFor="let respuesta of pregunta.respuestas">
+          <input type="radio" name="{{pregunta._id}}" id="{{respuesta._id}}" value="{{respuesta.respuesta}}"
+            [formControlName]="pregunta._id">
+
+          <label class="respuesta" for="{{respuesta._id}}">
+            {{respuesta.respuesta}}
+          </label>
+        </li>
+
+      </ol>
+    </div>
+    <div class="col-12">
+      <div class="d-grid gap-2 d-md-block text-center">
+        <button type="submit" class="btn btn-lg m-2 text-white" style="background: #f25b26;">
+          conclude
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

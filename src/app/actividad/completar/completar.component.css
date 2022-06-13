@@ -1,0 +1,11 @@
+.form-control-test {
+  display: inline-block !important;
+  color: #e95ca0;
+  border: none;
+  border-bottom: 1px solid #ced4da;
+  margin: 0 6px;
+  padding: 3px 10px;
+}
+.preguntaTitulo {
+  font-size: 20px;
+}

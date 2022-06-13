@@ -1,0 +1,33 @@
+.imagen {
+  cursor: pointer;
+}
+
+.tituloPregunta {
+  position: absolute;
+  font-size: 23px;
+  z-index: 2;
+  margin: 0 auto;
+  background: white;
+  width: 33%;
+  text-align: center;
+  left: 33%;
+}
+
+.pregunta {
+  height: 200px;
+}
+
+.respuestaPalabra {
+  padding: 75px 0px;
+  margin: 5px auto;
+  background-color: #f1b5e9;
+  font-size: 30px;
+}
+.respuestaImagen {
+  height: 180px;
+  margin: 5px auto;
+  background-color: #f1b5e9;
+  background-repeat: no-repeat;
+  background-size: auto 180px;
+  background-position: center;
+}
