@@ -13,9 +13,10 @@ export class OrdenarComponent implements OnInit {
   @Output() enviar = new EventEmitter<number>();
   preguntas!: Pregunta[];
   // la utilizo cuando el arrastre comienza
-  sombra:boolean = false;
+  sombra: boolean = false;
   elementoSaliente = 0;
   contenedorElemento = 0;
+  vectorErrores: string[] = [];
 
   constructor() { }
 
@@ -25,19 +26,19 @@ export class OrdenarComponent implements OnInit {
     this.actividad.preguntas.forEach((p, index) => {
 
       let res = this.shuffle(Object.assign([], p.respuestas))
-    
+
       this.preguntas[index] = Object.assign({}, p)
       this.preguntas[index].respuestas = res
     });
   }
 
   // donde llega
-  ordenado (e:any) {
+  ordenado(e: any) {
     e.preventDefault();
-  
+
     let numeroElementoEntranteHijo = e.dataTransfer.getData("elementoHijo");
     let elementoHijo = document.querySelector(`div[idHijo="${numeroElementoEntranteHijo}"]`)!;
-        
+
     let numeroElementoEntrantePadre = e.dataTransfer.getData("elementoPadre");
     // console.log("numero Elemento Entrante Padre", numeroElementoEntrantePadre)
     let elementoPadre = document.querySelector(`div[idPadre="${numeroElementoEntrantePadre}"]`);
@@ -50,30 +51,30 @@ export class OrdenarComponent implements OnInit {
     elementoPadreEntrante.appendChild(elementoHijo);
   }
 
-  arrastra (e:any) {
+  arrastra(e: any) {
     this.sombra = true;
-    e.dataTransfer.setData('elementoHijo', e.target.getAttribute("idHijo")); 
-    e.dataTransfer.setData('elementoPadre', e.target.parentElement.getAttribute("idPadre")); 
+    e.dataTransfer.setData('elementoHijo', e.target.getAttribute("idHijo"));
+    e.dataTransfer.setData('elementoPadre', e.target.parentElement.getAttribute("idPadre"));
   }
 
 
-  permitir (ev:any) {
+  permitir(ev: any) {
     ev.preventDefault();
     if (ev.target.getAttribute("draggable") == "true")
       ev.dataTransfer.dropEffect = "none"; // dropping is not allowed
     else
       ev.dataTransfer.dropEffect = "all";
   }
-  
-  ingresa(e:any) { 
+
+  ingresa(e: any) {
     e.preventDefault();
     let padre = e.target.getAttribute("idPadre");
     console.log(padre)
-    if(padre) {
+    if (padre) {
       this.contenedorElemento = padre;
       this.elementoSaliente = e.target.firstElementChild.getAttribute("idHijo");
     }
-  
+
   }
 
   shuffle(array: any[]) {
@@ -92,23 +93,46 @@ export class OrdenarComponent implements OnInit {
   }
 
   terminar() {
+    this.vectorErrores = [];
     let oraciones = [...Array.from(document.querySelectorAll('div[oracion="oracion"]'))]
     let correctos = 0
-    oraciones.forEach(o => {
+    oraciones.forEach((o, index) => { // recorre los div padre
       let correctasRespuestas = 0
-      let respuestasElementos = Array.from(o.children);
+      let respuestasElementos = Array.from(o.children); // aqui si son los contenedores de las palabras
       respuestasElementos.forEach(padre => {
         let hijo = padre.firstElementChild;
-        
-        if(padre.getAttribute('data-padre') == hijo?.getAttribute('data-hijo')) {
-          correctasRespuestas ++;
+
+        if (padre.getAttribute('data-padre') == hijo?.getAttribute('data-hijo')) {
+          correctasRespuestas++;
+        } else {
+          this.vectorErrores.push(this.actividad.preguntas[index]._id);
         }
       })
-      if(respuestasElementos.length == correctasRespuestas) {
+      if (respuestasElementos.length == correctasRespuestas) {
         correctos++;
       }
     })
-    
-    this.enviar.emit(correctos*this.preguntas[0].valor)
+
+    setTimeout(() => {
+      this.enviar.emit(correctos*this.preguntas[0].valor)
+    }, 2000);
+  }
+
+  crearOracion(index: number) {
+    let oraciones = [...Array.from(document.querySelectorAll('div[oracion="oracion"]'))]
+    let oracion = ""
+
+    let respuestasElementos = Array.from(oraciones[index].children); // aqui si son los contenedores de las palabras
+    respuestasElementos.forEach(padre => {
+      let hijo = padre.firstElementChild;
+      oracion += hijo?.textContent
+    })
+
+    return oracion;
+  }
+
+  contiene(id: string) {
+    console.log(this.vectorErrores)
+    return this.vectorErrores.some(e => id === e);
   }
 }

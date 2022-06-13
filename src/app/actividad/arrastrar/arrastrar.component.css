@@ -23,6 +23,7 @@
   background-color: #f1b5e9;
   font-size: 30px;
 }
+
 .respuestaImagen {
   height: 180px;
   margin: 5px auto;
@@ -30,4 +31,14 @@
   background-repeat: no-repeat;
   background-size: auto 180px;
   background-position: center;
+}
+
+.errorPregunta {
+  position: absolute;
+  font-size: 130px;
+  z-index: 2;
+  background: transparent;
+  width: 100%;
+  text-align: center;
+  height: 100%;
 }

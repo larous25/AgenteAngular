@@ -5,17 +5,23 @@
       class="pregunta col-10 offset-1 mb-3 border-3 border-bottom ">
       <div id="pregunta{{i}}" class="preguntaTitulo mt-3" [innerHTML]="pregunta.pregunta">
       </div>
+      <div *ngIf="contiene(pregunta._id)" class="errorPregunta" >
+        <i class="bi bi-x-circle"></i>
+      </div>
       <ol type="A" class="col-12 respuestasmultiples">
         <li *ngFor="let respuesta of pregunta.respuestas">
           <input type="radio" name="{{pregunta._id}}" id="{{respuesta._id}}" value="{{respuesta.respuesta}}"
             [formControlName]="pregunta._id">
-
           <label class="respuesta" for="{{respuesta._id}}">
             {{respuesta.respuesta}}
           </label>
         </li>
 
       </ol>
+    </div>
+
+    <div *ngIf="anuncio" class="alert alert-danger mt-3" role="alert">
+      please complete all the exercises
     </div>
     <div class="col-12">
       <div class="d-grid gap-2 d-md-block text-center">

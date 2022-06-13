@@ -52,3 +52,13 @@ input[type="radio"]:checked+label{
 .preguntaTitulo {
   font-size: 22px;
 }
+
+.errorPregunta {
+  position: absolute;
+  color:red;
+  font-size: 30px;
+  z-index: 2;
+  background: transparent;
+  width: 40%;
+  text-align: center;
+}

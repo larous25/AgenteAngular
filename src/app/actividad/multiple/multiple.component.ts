@@ -14,6 +14,8 @@ export class MultipleComponent implements OnInit {
   @Input() actividad!: Actividad;
   @Output() enviar = new EventEmitter<number>();
   actividadFormGroup !: FormGroup;
+  anuncio = false;
+  vectorErrores: string[] = [];
 
   constructor(private sanitized: DomSanitizer, private http: HttpClient, private router: Router,) {
     this.actividadFormGroup = new FormGroup({});
@@ -33,8 +35,11 @@ export class MultipleComponent implements OnInit {
   }
 
   terminar() {
-    
-    if (this.actividadFormGroup.invalid) return;
+    this.vectorErrores = [];
+    if (this.actividadFormGroup.invalid) {
+      this.anuncio = true;
+      return;
+    }
 
     let contador = {
       correctas: 0,
@@ -47,6 +52,8 @@ export class MultipleComponent implements OnInit {
       if (d[p._id] == r?.respuesta) {
         contador.correctas++;
         contador.valor += p.valor;
+      } else {
+        this.vectorErrores.push(p._id);
       }
     })
 
@@ -56,8 +63,15 @@ export class MultipleComponent implements OnInit {
       actividadValor = contador.valor;
       console.log(`correcto ${actividadValor} puntos para grifindor`)
     }
-    this.enviar.emit(actividadValor)
+
+    setTimeout(() => {
+      this.enviar.emit(actividadValor);
+    }, 2000);
   }
 
+  contiene(id: string) {
+    console.log(this.vectorErrores)
+    return this.vectorErrores.some(e => id === e);
+  }
 }
 

@@ -13,6 +13,7 @@ export class ArrastrarComponent implements OnInit {
   @Output() enviar = new EventEmitter<number>();
   preguntas!: Pregunta[];
   anuncio = false;
+  vectorErrores: string[] = [];
 
   constructor() {
 
@@ -27,7 +28,7 @@ export class ArrastrarComponent implements OnInit {
   soltado(ev: any) {
     ev.preventDefault();
     let rid = ev.dataTransfer.getData("rid");
-    if(ev.target.firstElementChild == null) {
+    if (ev.target.firstElementChild == null) {
       let d = document.querySelector(`div[rid="${rid}"]`);
       ev.target.appendChild(d);
     } else {
@@ -72,6 +73,7 @@ export class ArrastrarComponent implements OnInit {
 
 
   terminar() {
+    this.vectorErrores = [];
     let inputElements = [...Array.from(document.querySelectorAll('div[pregunta="pregunta"]'))]
 
     let contador = 0;
@@ -79,16 +81,25 @@ export class ArrastrarComponent implements OnInit {
       let padre = (ie as HTMLElement)
       if (!padre.firstElementChild) {
         this.anuncio = true;
-        break;
+        return;
       }
       let hijo = padre.firstElementChild
       console.log(padre.getAttribute('pid'), hijo?.getAttribute('pid'))
       if (padre.getAttribute('pid') == hijo?.getAttribute('pid')) {
         contador += this.actividad.preguntas[index].valor
+      } else {
+        this.vectorErrores.push(padre.getAttribute('pid')!);
       }
     }
 
+    setTimeout(() => {
+      this.enviar.emit(contador);
 
-    this.enviar.emit(contador);
+    }, 2000);
+  }
+
+  contiene(id: string) {
+    console.log(this.vectorErrores)
+    return this.vectorErrores.some(e => id === e);
   }
 }

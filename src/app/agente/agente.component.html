@@ -25,11 +25,11 @@
           you need to tell us how you feel!
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="agente.progresos.length>0">
           <div class="col-12 mt-3">
             Would you like to repeat the activities
           </div>
-          <div class="row" *ngIf="agente">
+          <div class="row" >
             <div class="col actividad" *ngFor="let p of agente.progresos, let i = index"
               [ngClass]="{'active': actividadSelecionada === i}" (click)="actividadASelecionar(p.actividad, i)">
               {{p.actividad}}
@@ -40,7 +40,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-lg text-white" style="background: #f25b26;" data-bs-dismiss="modal"
-          (click)="terminar()">Close</button>
+          (click)="terminar()">Accept</button>
       </div>
     </div>
   </div>

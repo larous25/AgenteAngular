@@ -28,6 +28,10 @@
       </div>
     </div>
 
+    <div class="row" *ngIf="actividad.imagen">
+      <img src="assets/{{actividad.imagen}}" alt="">
+    </div>
+
     <app-arrastrar [actividad]="actividad" *ngIf="actividad.tipo == 'emparejar'" (enviar)="terminar($event)">
     </app-arrastrar>
 

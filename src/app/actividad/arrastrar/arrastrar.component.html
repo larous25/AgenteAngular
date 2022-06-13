@@ -10,6 +10,9 @@
           <div style="position: relative;">
             <div class="tituloPregunta">
               {{ p.pregunta }}
+            </div>{{contiene(p._id)}}
+            <div *ngIf="contiene(p._id)" class="errorPregunta" style="color:red">
+              <i class="bi bi-x-circle"></i>
             </div>
             <div pregunta="pregunta" attr.pid="{{p._id}}" (drop)="soltado($event)" (dragover)="permitir($event)"
               (dragenter)="ingresa($event)" class="pregunta text-center border bg-info">
@@ -32,7 +35,7 @@
     </div>
 
 
-    <div *ngIf="anuncio" class="alert alert-danger" role="alert">
+    <div *ngIf="anuncio" class="alert alert-danger mt-3" role="alert">
       please complete all the exercises
     </div>
     <div class="d-grid gap-2 d-md-block text-center">

@@ -4,7 +4,7 @@
 
 /* este es el contenedor */
 .palabraOrdenada {
-  background: #0050bc;  
+  background: #0050bc;
   display: inline-block;
   padding: 15px 40px;
   margin-right: 5px;
@@ -12,13 +12,13 @@
 
 .palabraAordenar {
   padding: 15px;
-  background: #1b1464;
+  background: #02a9a1 ;
   color: white;
   cursor: pointer;
 }
 
 .sombra {
-  box-shadow: 7px 4px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 7px 4px 10px 0px rgba(0, 0, 0, 0.75);
 }
 
 
@@ -28,4 +28,11 @@
   border: none;
   border-bottom: 1px solid #ced4da;
   margin: 0 6px;
+}
+
+.errorPregunta {
+  color: red;
+  font-size: 30px;
+  background: transparent;
+  text-align: center;
 }

@@ -5,14 +5,18 @@
       <div class="col-12 oraciones">
         <div class="row" *ngFor="let p of actividad.preguntas">
           <div class="col-6 preguntaTitulo mt-3" [innerHTML]="limpiar(p.pregunta)"></div>
-          <div class="col-6" *ngFor="let r of p.respuestas">
-            <img class="img-fluid" src="assets/{{r.imagen}}" style="height:200px ;">
+          <div class="col-6" *ngFor="let r of p.respuestas" style="position: relative;">
+            <div *ngIf="contiene(r._id)" class="errorPregunta" >
+              <i class="bi bi-x-circle"></i>
+            </div>
+            <img *ngIf="r.imagen" class="img-fluid" src="assets/{{r.imagen}}" style="height:200px ;">
           </div>
         </div>
       </div>
+    </div>
 
-
-
+    <div *ngIf="anuncio" class="alert alert-danger mt-3" role="alert">
+      please complete all the exercises
     </div>
     <div class="d-grid gap-2 d-md-block text-center">
       <button class="btn btn-lg m-2 text-white" style="background: #f25b26;" (click)="terminar()">
